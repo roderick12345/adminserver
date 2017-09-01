@@ -5,29 +5,35 @@ body {
 body header div{
 border: 1px solid black;
 
+
 }
 header{
-	
-	background: white;
+
+	background: rgb(98,101,103);
 	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.6);
+
 }
-body header  div h1 {
+body header  div h1,h3 {
 	text-align: center;
-	color: black;
+	color: rgb(171,178,185);
+
 
 }
-section{
+
+#padre{
 	border: 1px solid black;
-	
-}
-body section nav ul {
-	text-align: center;;
-	margin-top: 20px;
-
-}
-
-article div {
-	border: 1px solid black;
-	width: 100%;
+	width: 98%;
 	height: 1000px;
 }
+
+article div{
+	width: 330px;
+	height: 275px;
+	border: 1px solid black;
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	margin-left: 20px;
+}
+
