@@ -1,0 +1,16 @@
+[
+	{
+	'hostname':'web-server','address':'192.168.1.9','icon':'etc/default/icon-server.png'
+	'services':
+		[
+			{'name':'apache2','get':['sysContact']}
+		]
+	},
+	{
+	'hostname':'web-server','address':'192.168.1.9','icon':'etc/default/icon-server.png'
+	'services':
+		[
+			{'name':'apache2','get':['sysContact']}
+		]
+	}
+]
