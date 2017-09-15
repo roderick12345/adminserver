@@ -1,0 +1,1 @@
+{"host": "smtp_server", "interval": 15000, "gets": ["Memory", "Network"], "services": [], "address": "192.10.20.1"}

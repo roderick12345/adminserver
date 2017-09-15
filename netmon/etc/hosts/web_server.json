@@ -1,0 +1,1 @@
+{"host": "web_server", "interval": 16, "gets": ["Memory"], "services": ["apache2", "imap"], "address": "192.168.20.10"}

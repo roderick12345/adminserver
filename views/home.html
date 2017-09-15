@@ -7,32 +7,38 @@
 				<li><a href="#"><span class="glyphicon glyphicon-info-sign">&nbsp;</span>Reportes</a></li>
 			</ul>
 		</div>
-		<article class="col-sm-9 col-md-10">
-			  <div class="col-sm-9 col-md-3">
-			    <div class="thumbnail">
-			      <img class="imagen" src="imagenes/servers.png" alt="...">
-			      <div class="caption">
-			        <h3>Name</h3>
-			        <p>Address</p>
-			        <p>Estado &nbsp; <span ><button class="btn btn-success status"></button> </span></p>
-			        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+		<article class="col-sm-9 col-md-10" id="contenedor">
+			
+			  <script type="text/javascript">
+			  	$.ajax({
+			  			url:'datos.php', type:'GET',
+			  			success: function(){
+			  				 var div = $("#col-sm-9 col-md-3");
+			  			}
+
+			  	})
+			  </script>
+		</article>
+		<!-- div de la ventana modal-->
+	<div id="myModal" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+
+			    <!-- Modal content-->
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal">&times;</button>
+			        <h4 class="modal-title">Nombre del dispositvo</h4>
+			      </div>
+			      <div class="modal-body">
+			        <h5>Dirección</h5>
+			        <h5></h5>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			      </div>
 			    </div>
+
 			  </div>
+			</div>
 
-				 <div class="col-sm-9 col-md-3">
-			    <div class="thumbnail">
-			      <img class="imagen" src="imagenes/servers.png" alt="...">
-			      <div class="caption">
-			        <h3>Name</h3>
-			        <p>Address</p>
-			        <p>Estado &nbsp; <span ><button class="btn btn-danger status"></button> </span></p>
-			        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
-			      </div>
-			    </div>
-			  </div>
-
-
-
-	</article>
 	</div>

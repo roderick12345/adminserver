@@ -9,17 +9,18 @@
 	<link rel="stylesheet" type="text/css" href="css/esttilos.css">
 	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/java.js"></script>
 
 </head>
 <body>
 	<?php 
-	include_once 'views/encabezado.html';
+		include 'views/encabezado.html';
 		if (isset($_GET['view'])&&$_GET['view']=='log') {
 			# code...
 		}
 		else
 		{
-			include_once 'views/home.html';
+			include 'views/home.html';
 		}
 	 ?>
 	<footer>
