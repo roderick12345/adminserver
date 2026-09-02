@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        worker_instance: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        worker_instance: [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     steps:
       - name: Prerequisite Installation & Boot
